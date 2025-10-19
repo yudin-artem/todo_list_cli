@@ -28,3 +28,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+todo_list_cli.iml
+ToDo_app.csv
+target
+vcs.xml
