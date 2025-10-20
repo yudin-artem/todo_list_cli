@@ -3,12 +3,10 @@ import todo_cli.ToDo_app;
 import java.util.Scanner;
 
 
-//добавить сохранение файла в случае ошибки
 public class Main {
     public static void main(String[] args) {
         ToDo_app app = new ToDo_app();
         Scanner scanner = new Scanner(System.in);
-        app.sort_ByCreationDate();
         app.print_notes();
 
         boolean exit = false;
@@ -67,6 +65,8 @@ public class Main {
                                 tags = scanner.nextLine();
                                 app.add_tags(id, tags);
                                 break;
+                            default:
+                                System.out.println("Invalid choice");
                         }
                         break;
                     case 5:
@@ -96,6 +96,8 @@ public class Main {
                             case 2:
                                 app.sort_ByCreationDate();
                                 break;
+                            default:
+                                System.out.println("Invalid choice");
                         }
                         break;
                     case 7:
@@ -113,18 +115,28 @@ public class Main {
                                 tags = scanner.nextLine();
                                 app.search_ByTags(tags);
                                 break;
+                            default:
+                                System.out.println("Invalid choice");
                         }
                         break;
                     case 8:
-                        app.save_notes();
                         exit = true;
                         break;
+                    default:
+                        System.out.println("Invalid choice");
                 }
                 System.out.println("-----------------------------------------------------------------");
             }
             catch (NumberFormatException e){
                 System.err.println("Error: not a number entered");
             }
+            catch (IndexOutOfBoundsException e){
+                System.err.println("Error: note not found");
+            }
+            catch (Exception e) {
+                System.err.println("Unexpected error occurred: " + e.getMessage());
+            }
         }
+        app.save_notes();
     }
 }
